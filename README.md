@@ -23,9 +23,43 @@ cd ../enabled
 ln -s ../available/kuzzle-plugin-auth-passport-oauth .
 ```
 
+- Modify the .kuzzlerc in Kuzzle to add the oauth plugin configuration in the `plugins` entry or cp the one which is present here.
+
+For example you can add a strategy like this (facebook example):
+
+```json
+"plugins": {
+    "kuzzle-plugin-auth-passport-oauth": {
+            "strategies": {
+                "facebook": {
+                    "credentials": {
+                        "clientID": "<your client id>",
+                        "clientSecret": "<your client secret>",
+                        "callbackURL": "http://localhost:8888/#!/facebook"
+                    },
+                    "persist": [
+                        "login",
+                        "public_profile",
+                        "name",
+                        "email"
+                    ],
+                    "scope": [
+                        "email",
+                        "public_profile"
+                    ]
+                }
+            }
+        }
+}
+```
+
+Note: This Android application uses facebook, github as an example.
+
 - Run Kuzzle using docker
 
 ```sh
 cd ../../
 docker-compose -f docker-compose/dev.yml up
 ```
+
+## Android application
