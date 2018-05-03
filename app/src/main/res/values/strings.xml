@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">kuzzle-oauth-android-example</string>
+    <string name="action_settings">Settings</string>
+</resources>
