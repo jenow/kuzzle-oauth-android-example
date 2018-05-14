@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">kuzzle-oauth-android-example</string>
-    <string name="action_settings">Settings</string>
-    <string name="login">Login</string>
+    <string name="kuzzle_host">192.168.1.5</string>
+    <string name="facebook">Continue with facebook</string>
+    <string name="twitter">Continue with twitter</string>
+    <string name="cancel">Cancel</string>
+    <string name="fetching">Fetching credentials...</string>
+    <string name="lbFirstname">First name:</string>
+    <string name="lbLastname">Last name:</string>
+    <string name="lbEmail">Email:</string>
 </resources>

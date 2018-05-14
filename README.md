@@ -33,20 +33,18 @@ For example you can add a strategy like this (facebook example):
             "strategies": {
                 "facebook": {
                     "credentials": {
-                        "clientID": "<your client id>",
-                        "clientSecret": "<your client secret>",
-                        "callbackURL": "http://localhost:8888/#!/facebook"
+                        "clientID": "<your app id>",
+                        "clientSecret": "<your app secret>",
+                        "callbackURL": "http://<kuzzle host>:7512/_login/facebook"
                     },
                     "persist": [
-                        "login",
-                        "public_profile",
-                        "name",
-                        "email"
+                        "id"
                     ],
                     "scope": [
                         "email",
                         "public_profile"
-                    ]
+                    ],
+                    "identifierAttribute": "id"
                 }
             }
         }
