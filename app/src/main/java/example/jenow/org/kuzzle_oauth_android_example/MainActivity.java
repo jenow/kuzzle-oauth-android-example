@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.fb).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.twitter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
 
-                loginIntent.putExtra("strategy", "twitter");
+                loginIntent.putExtra("strategy", "github");
                 startActivity(loginIntent);
             }
         });

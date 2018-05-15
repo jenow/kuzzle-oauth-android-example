@@ -96,11 +96,13 @@ public class LoginActivity extends AppCompatActivity {
         kuzzle.login(strategy, new ResponseListener<JSONObject>() {
             @Override
             public void onSuccess(final JSONObject object) {
+                Log.e("e", object.toString());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             if (object.has("headers")) {
+                                wv.getSettings().setJavaScriptEnabled(true);
                                 wv.setWebViewClient(kuzzle.getKuzzleWebViewClient());
                                 wv.loadUrl(object.getJSONObject("headers").getString("Location"));
                             } else {
@@ -127,17 +129,27 @@ public class LoginActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    private UserData fillUserInfoFromProvider(final String provider, final JSONObject profile) throws JSONException {
+        UserData userData = null;
+
+        if (provider.equals("facebook")) {
+            userData = new UserData(profile.getString("first_name") + " " + profile.getString("last_name"), profile.getJSONObject("picture").getJSONObject("data").getString("url"), profile.getString("email"), "");
+        } else if (provider.equals("github")) {
+            userData = new UserData(profile.getString("name"), profile.getString("avatar_url"), profile.getString("email"), profile.getString("bio"));
+        }
+
+        return userData;
+    }
+
     private void displayCredentials(final View userInfoView) {
         try {
+            findViewById(R.id.inprogress_layout).setVisibility(View.VISIBLE);
             kuzzle.getMyCredentials(strategy, new ResponseListener<JSONObject>() {
                 @Override
                 public void onSuccess(final JSONObject response) {
                     try {
-                        final Drawable drawable = Drawable.createFromStream((InputStream) new URL(response.getJSONObject("picture").getJSONObject("data").getString("url")).getContent(), "src");
-                        final String firstname = response.getString("first_name");
-                        final String lastname = response.getString("last_name");
-                        final String email = response.getString("email");
-
+                        final UserData userData = fillUserInfoFromProvider(strategy, response);
+                        final Drawable drawable = Drawable.createFromStream((InputStream) new URL(userData.getAvatar()).getContent(), "src");
 
                         handler.post(new Runnable() {
                             @Override
@@ -145,10 +157,9 @@ public class LoginActivity extends AppCompatActivity {
                                 findViewById(R.id.inprogress_layout).setVisibility(View.GONE);
                                 userInfoView.setVisibility(View.VISIBLE);
                                 ((ImageView)findViewById(R.id.picture)).setImageDrawable(drawable);
-                                ((TextView) findViewById(R.id.txtFirstname)).setText(firstname);
-                                ((TextView) findViewById(R.id.txtLastname)).setText(lastname);
-                                ((TextView) findViewById(R.id.txtEmail)).setText(email);
-
+                                ((TextView) findViewById(R.id.name)).setText(userData.getName());
+                                ((TextView) findViewById(R.id.txtEmail)).setText(userData.getEmail());
+                                ((TextView) findViewById(R.id.bio)).setText(userData.getBio());
                             }
                         });
                     } catch (IOException e) {

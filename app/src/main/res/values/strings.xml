@@ -2,10 +2,10 @@
     <string name="app_name">kuzzle-oauth-android-example</string>
     <string name="kuzzle_host">192.168.1.5</string>
     <string name="facebook">Continue with facebook</string>
-    <string name="twitter">Continue with twitter</string>
+    <string name="github">Continue with github</string>
     <string name="cancel">Cancel</string>
     <string name="fetching">Fetching credentials...</string>
-    <string name="lbFirstname">First name:</string>
-    <string name="lbLastname">Last name:</string>
+    <string name="name">Name:</string>
     <string name="lbEmail">Email:</string>
+    <string name="lbBio">Bio:</string>
 </resources>
