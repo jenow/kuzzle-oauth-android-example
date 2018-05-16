@@ -92,12 +92,8 @@ docker-compose -f docker-compose/dev.yml up
 
 This application make you login through facebook and github then show some information about your profile.
 
-![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/main.png | width=300)
-
-![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/facebook.png | width=300)
-
-![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/post_facebook.png | width=300)
-
-![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/github.png | width=300)
-
-![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/post_github.png | width=300)
+![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/main.png)
+![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/facebook.png)
+![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/post_facebook.png)
+![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/github.png)
+![](https://github.com/jenow/kuzzle-oauth-android-example/raw/master/assets/post_github.png)
