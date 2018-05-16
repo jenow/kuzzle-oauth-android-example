@@ -23,35 +23,63 @@ cd ../enabled
 ln -s ../available/kuzzle-plugin-auth-passport-oauth .
 ```
 
-- Modify the .kuzzlerc in Kuzzle to add the oauth plugin configuration in the `plugins` entry or cp the one which is present here.
+- Modify the .kuzzlerc in Kuzzle to add the oauth plugin configuration in the `plugins` entry.
 
 For example you can add a strategy like this (facebook example):
 
 ```json
 "plugins": {
-    "kuzzle-plugin-auth-passport-oauth": {
-            "strategies": {
-                "facebook": {
-                    "credentials": {
-                        "clientID": "<your app id>",
-                        "clientSecret": "<your app secret>",
-                        "callbackURL": "http://<kuzzle host>:7512/_login/facebook"
-                    },
-                    "persist": [
-                        "id"
-                    ],
-                    "scope": [
-                        "email",
-                        "public_profile"
-                    ],
-                    "identifierAttribute": "id"
-                }
+  "kuzzle-plugin-auth-passport-oauth": {
+        "strategies": {
+          "github": {
+              "credentials": {
+                "clientID": "<your client id>",
+                "clientSecret": "<your client secret>",
+                "callbackURL": "http://<kuzzle host>:7512/_login/github"
+              },
+              "persist": [
+                "id",
+                "name",
+                "avatar_url",
+                "email",
+                "bio"
+              ],
+              "scope": [
+                "email"
+              ],
+              "identifierAttribute": "id",
+              "defaultProfiles": ["default"]
+            },
+            "facebook": {
+                "credentials": {
+                    "clientID": "<your client id>",
+                    "clientSecret": "<your client secret>",
+                    "callbackURL": "http://<kuzzle host>:7512/_login/facebook",
+                    "profileFields": ["id", "first_name", "last_name", "picture.type(large)", "email", "about"]
+                },
+                "persist": [
+                    "id",
+                    "email",
+                    "picture",
+                    "about",
+                    "first_name",
+                    "last_name"
+		        ],
+                "scope": [
+                    "email",
+                    "public_profile"
+                ],
+                "identifierAttribute": "id",
+                "defaultProfiles": [
+                    "default"
+                ]
             }
         }
+    }
 }
 ```
 
-Note: This Android application uses facebook, github as an example.
+Note: This Android application uses facebook and github as an example.
 
 - Run Kuzzle using docker
 
@@ -61,3 +89,6 @@ docker-compose -f docker-compose/dev.yml up
 ```
 
 ## Android application
+
+This application make you login through facebook and github then show some information about your profile.
+
